@@ -4,12 +4,13 @@ const
   NexeCompiler = require('./compiler').NexeCompiler,
   argv = require('./options').argv
 
-const pipeline = compose(
-  download
-)
-
 function compile(options) {
-  pipeline(new NexeCompiler(options))
+  const compiler = new NexeCompiler(options)
+
+  const main = compose(
+    download
+  )
+  return main(compiler)
 }
 
 module.exports.compile = compile
